@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import * as FileSaver from 'file-saver';
 
-
 @Injectable({
   providedIn: 'root',
 })
 export class FileDownloadService {
+  
   downloadAsCSV(rows: any[], fileName: string = 'data.csv'): void {
     if (!rows || !rows.length) {
       console.error('No data to download');
@@ -18,10 +18,22 @@ export class FileDownloadService {
   }
 
   private convertToCSV(rows: any[]): string {
-    const header = Object.keys(rows[0]).join(',') + '\n';
-    const body = rows
-      .map(row => Object.values(row).map(value => `"${value}"`).join(','))
-      .join('\n');
-    return header + body;
+
+    const csvArray: string[] = [];
+
+    csvArray.push(Object.keys(rows[0]).map(this.escapeCsvValue).join(','));
+
+    for (const row of rows) {
+      csvArray.push(Object.values(row).map(this.escapeCsvValue).join(','));
+    }
+
+    return csvArray.join('\n');
+  }
+
+  private escapeCsvValue(value: any): string {
+    if (typeof value === 'string') {
+      value = value.replace(/"/g, '""'); 
+    }
+    return `"${value}"`; 
   }
 }

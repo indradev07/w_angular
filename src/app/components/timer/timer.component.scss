@@ -6,17 +6,18 @@
   }
 
 .timer {
-    @include text-properties(24px, 400, #444 , 1.4);
+    @include text-properties(24px, 400, #fff , 1.4);
     position: fixed;
     bottom: 20px;
     right: 20px;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: lightgray;
+    background-color: #809CB5 ;
     text-align: center;
     p {
-        margin: 0 auto;     
+        margin: 0 auto; 
+        font-size: 18px;    
     }
 
     span {

@@ -1,0 +1,1 @@
+optimise code, check code quality , memory utilisation , memory leakage, performance, data leakage, subscription , unsubscribe and also suggest something is missing for performance optimization 

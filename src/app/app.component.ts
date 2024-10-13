@@ -45,7 +45,7 @@ export class AppComponent implements OnInit, OnDestroy {
             takeUntil(this.destroy$),
             catchError(this.handleError)
         ).subscribe(val => {
-            this.data = [...val]; // Create a new reference
+            this.data = [...val]; 
         });
     }
 
@@ -56,12 +56,12 @@ export class AppComponent implements OnInit, OnDestroy {
 
     async toggleComponent() {
         if (this.lazyComponent) {
-            this.lazyComponent = null; // Hide the component
+            this.lazyComponent = null; 
             return;
         } 
 
         const { PokemonComponent } = await import('./components/pokemon/pokemon.component');
-        this.lazyComponent = PokemonComponent; // Set the lazy-loaded component
+        this.lazyComponent = PokemonComponent; 
         this.cdr.detectChanges();
     }
 }

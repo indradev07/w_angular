@@ -9,15 +9,7 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  .sticky {
-    position: sticky;
-    top: 50px;
-    background-color: yellow;
-    padding: 20px;
-    font-size: 20px;
-  }
   
-//headings and text
 @mixin text-properties($size,$font-weight,$color,$line-height){
   font-size: $size;
   font-weight: $font-weight;
@@ -25,32 +17,35 @@
   line-height: $line-height;
 }
 
+
 main {
   width: 100%;
   min-height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
+  padding: 0 2rem;
+ 
 }
 
 
 .content {
-  max-width: 950px;
+  max-width: 920px;
+  position: relative;
 }
 
 .capitalize-first {
-  text-transform: lowercase; /* Ensure all text is lowercase initially */
+  text-transform: lowercase; 
 }
 
 .capitalize-first::first-letter {
-  text-transform: uppercase; /* Capitalize only the first letter */
+  text-transform: uppercase; 
 }
 
 @mixin capitalize-first {
   text-transform: lowercase;
   &::first-letter {
-    text-transform: uppercase; /* Capitalize only the first letter */
+    text-transform: uppercase;
   }
 }
 
@@ -58,25 +53,31 @@ main {
 .heading {
   @include text-properties(24px, 600, #150d0d , 1);
   @include capitalize-first();
+  margin-bottom: 0;
 }
 
 .sub-heading {
   @include text-properties(16px, 400, #444 , 1.4);
   @include capitalize-first();
-  padding-block: .05rem 2rem;
+  padding-block: .08rem 1rem;
+  margin: 0;
 }
 
 @mixin button {
-  @include text-properties(16px, 500, #444 , 1.4);
+  @include text-properties(16px, 600, #fff , 1.4);
   padding: 10px 20px;
   cursor: pointer;
   border: 1px solid #ddd;
 
   border-radius: 10px;
-  background-color: rgb(245 245 245 / 1);
+  background-color: #39638C;
   width: 10rem;
 
   text-align: center;
+
+  z-index: 1;
+
+ 
 
   &:hover {
     box-shadow: 0 .45rem .45rem 0 rgba(50,50,50,.2);
@@ -87,6 +88,9 @@ main {
 .pokemon {
   &-button {
     @include button(); 
+    position: sticky;
+    top: -4px;
+    left: 10px;
   }
 }
 
@@ -94,12 +98,14 @@ main {
   .download-button {
     @include button();
     
-    position: absolute;
-    left: 20%;
-    transform: translate(100%, -100%);
+    position: fixed;
+    transform: translate(100%);
+    top: -4px;
+    left: 55%;
+
   }
- 
 }
+
 
 
 
