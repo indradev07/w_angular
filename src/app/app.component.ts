@@ -1,13 +1,67 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { catchError, throwError, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { TimerComponent } from './components/timer/timer.component';
+
+interface Post {
+    userId: number;
+    id: number;
+    title: string;
+    body: string;
+}
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+    selector: 'app-root',
+    standalone: true,
+    imports: [RouterOutlet, CommonModule, TimerComponent],
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent {
-  title = 'app-18';
+export class AppComponent implements OnInit, OnDestroy {
+    private http = inject(HttpClient);
+    private cdr = inject(ChangeDetectorRef);
+
+    data: Post[] = [];
+    lazyComponent: any = null;
+    private destroy$ = new Subject<void>();
+
+    ngOnInit() {
+        this.fetchAndHandlePostData(); 
+    }
+
+    ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.complete();
+    }
+
+    fetchAndHandlePostData(): void {
+        const url = 'https://jsonplaceholder.typicode.com/posts';
+
+        this.http.get<Post[]>(url).pipe(
+            takeUntil(this.destroy$),
+            catchError(this.handleError)
+        ).subscribe(val => {
+            this.data = [...val]; // Create a new reference
+        });
+    }
+
+    private handleError(error: any) {
+        console.error('Error occurred:', error);
+        return throwError(error);
+    }
+
+    async toggleComponent() {
+        if (this.lazyComponent) {
+            this.lazyComponent = null; // Hide the component
+            return;
+        } 
+
+        const { PokemonComponent } = await import('./components/pokemon/pokemon.component');
+        this.lazyComponent = PokemonComponent; // Set the lazy-loaded component
+        this.cdr.detectChanges();
+    }
 }

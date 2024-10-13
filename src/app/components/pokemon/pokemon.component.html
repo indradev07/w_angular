@@ -1,0 +1,27 @@
+<div class="download-button" (click)="download()">
+  Download CSV
+</div>
+<h1>Pokémon Table</h1>
+
+<ng-container *ngIf="loading; else table">
+  <div class="loading-container">
+    <div class="loader"></div>
+  </div>
+</ng-container>
+
+<ng-template #table>
+  <ngx-datatable
+    class="bootstrap"
+    [rows]="rows"
+    [columns]="columns"
+    [headerHeight]="50"
+    [rowHeight]="'auto'"
+    [limit]="50"
+    (activate)="onActivate($event)">
+  </ngx-datatable>
+</ng-template>
+
+
+
+
+

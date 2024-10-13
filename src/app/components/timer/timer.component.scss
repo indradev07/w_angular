@@ -1,0 +1,30 @@
+@mixin text-properties($size,$font-weight,$color,$line-height){
+    font-size: $size;
+    font-weight: $font-weight;
+    color: $color;
+    line-height: $line-height;
+  }
+
+.timer {
+    @include text-properties(24px, 400, #444 , 1.4);
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: lightgray;
+    text-align: center;
+    p {
+        margin: 0 auto;     
+    }
+
+    span {
+        font-family: 600 !important;
+    }
+  }
+
+
+
+
+  

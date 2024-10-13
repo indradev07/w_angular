@@ -1,0 +1,111 @@
+/* You can add global styles to this file, and also import other style files */
+
+:host {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+      "Segoe UI Symbol";
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .sticky {
+    position: sticky;
+    top: 50px;
+    background-color: yellow;
+    padding: 20px;
+    font-size: 20px;
+  }
+  
+//headings and text
+@mixin text-properties($size,$font-weight,$color,$line-height){
+  font-size: $size;
+  font-weight: $font-weight;
+  color: $color;
+  line-height: $line-height;
+}
+
+main {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+
+.content {
+  max-width: 950px;
+}
+
+.capitalize-first {
+  text-transform: lowercase; /* Ensure all text is lowercase initially */
+}
+
+.capitalize-first::first-letter {
+  text-transform: uppercase; /* Capitalize only the first letter */
+}
+
+@mixin capitalize-first {
+  text-transform: lowercase;
+  &::first-letter {
+    text-transform: uppercase; /* Capitalize only the first letter */
+  }
+}
+
+
+.heading {
+  @include text-properties(24px, 600, #150d0d , 1);
+  @include capitalize-first();
+}
+
+.sub-heading {
+  @include text-properties(16px, 400, #444 , 1.4);
+  @include capitalize-first();
+  padding-block: .05rem 2rem;
+}
+
+@mixin button {
+  @include text-properties(16px, 500, #444 , 1.4);
+  padding: 10px 20px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+
+  border-radius: 10px;
+  background-color: rgb(245 245 245 / 1);
+  width: 10rem;
+
+  text-align: center;
+
+  &:hover {
+    box-shadow: 0 .45rem .45rem 0 rgba(50,50,50,.2);
+    border-width: 2px;
+  }
+}
+
+.pokemon {
+  &-button {
+    @include button(); 
+  }
+}
+
+.pokemon-button ~ ::ng-deep app-pokemon {
+  .download-button {
+    @include button();
+    
+    position: absolute;
+    left: 20%;
+    transform: translate(100%, -100%);
+  }
+ 
+}
+
+
+
+
+
+
+
+ 
+
