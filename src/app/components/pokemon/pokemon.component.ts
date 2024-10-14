@@ -85,7 +85,13 @@ export class PokemonComponent implements OnInit, OnDestroy {
     }
 
     public download() {
-        this.fileDownloadService.downloadAsCSV(this.rows, 'pokemons.csv');
+        const dataToPrint = this.rows.map(({ name, height, weight, id: rank }) => ({
+            name,
+            height,
+            weight,
+            rank
+        }));
+        this.fileDownloadService.downloadAsCSV(dataToPrint, 'pokemons.csv');
     }
 
     public onActivate(event: any) {
