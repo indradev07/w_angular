@@ -25,8 +25,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private http = inject(HttpClient);
     private cdr = inject(ChangeDetectorRef);
 
-    data: Post[] = [];
-    lazyComponent: any = null;
+    public data: Post[] = [];
+    public lazyComponent: any = null;
     private destroy$ = new Subject<void>();
 
     ngOnInit() {

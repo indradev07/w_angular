@@ -34,7 +34,7 @@ export class PokemonComponent implements OnInit, OnDestroy {
         { prop: 'weight', name: 'Weight' },
         { prop: 'id', name: 'Rank' }
     ];
-    loading = true;
+    public loading = true;
 
     ngOnInit() {
         this.loadPokemons();

@@ -10,7 +10,7 @@ import moment from 'moment';
 })
 export class TimerComponent implements OnInit, OnDestroy {
   private cdr = inject(ChangeDetectorRef);
-  timeSpentInApp: string = '0';
+  public timeSpentInApp: string = '0';
   private intervalId: ReturnType<typeof setInterval> | null = null;
   private ngZone = inject(NgZone);
 
