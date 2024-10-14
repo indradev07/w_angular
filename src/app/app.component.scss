@@ -90,7 +90,7 @@ main {
   &-button {
     @include button(); 
     position: sticky;
-    top: -4px;
+    top: 0px;
     left: 10px;
   }
 }
@@ -98,14 +98,17 @@ main {
 .pokemon-button ~ ::ng-deep app-pokemon {
   .download-button {
     @include button();
-    
+
     position: fixed;
     transform: translate(100%);
-    top: -4px;
-    left: 55%;
-
+    top: 0;
+    left: 52%;
+    @media only screen and (max-width: 767px) {
+      left: 12%; 
+    }
   }
 }
+
 
 
 
